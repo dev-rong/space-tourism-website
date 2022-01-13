@@ -34,6 +34,13 @@
     gap:var(--gap, 1rem);
 }
 
+/* applies if the child has its sibling before it */
+/* .flow > * + * { */
+   /* .flow > *:where(:not(:first-child)) {
+    margin-top: var(--flow-space, 1rem);
+    outline: 1px solid red;
+} */
+
 .container {
     padding-inline: 2em;
     margin-inline: auto;
@@ -109,3 +116,102 @@
     line-height: 1.1;
 }
 
+.numbered-title {
+    font-family: var(--ff-sans-cond);
+    font-size: var(--fs-500);
+    text-transform: uppercase;
+    /* for small, specific things, you can mix */
+    letter-spacing: 4.72px;
+}
+
+.numbered-title span{
+    /* relative to the font-size of .numbered-title */
+    margin-right: .5em; 
+    font-weight: 700;
+    color: hsl( var(--clr-white) / .25 );
+}
+
+/*-------------------*/
+/*components         */
+/*-------------------*/
+
+.large-button {
+    display: grid;
+    place-items: center;
+    aspect-ratio: 1;
+    padding: 0 2em;
+    border-radius: 50%;
+    text-decoration: none;
+    position: relative;
+    z-index: 1;
+}
+
+.large-button::after {
+    position: absolute;
+    content: '';
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    opacity: 0;
+    background: hsl(var(--clr-white) / .15);
+    border-radius: 50%;
+    transition: opacity 500ms linear, transform 750ms ease-in-out; 
+}
+
+.large-button:hover::after,
+.large-button:focus::after {
+    opacity: 1;
+    transform: scale(1.5);
+}
+
+.primary-navigation {
+    list-style: none;
+    /* justify-content: space-around; */
+    padding: 0;
+    margin: 0;
+    --underline-gap: 2rem;
+}
+
+.primary-navigation a {
+    /* color:hsl( var(--clr-white) ); */
+    text-decoration: none;
+    font-family: var(--ff-sans-cond);
+    /* text-transform: uppercase; */
+    /* letter-spacing: 2.7px; */
+    
+}
+
+/* .primary-navigation:first-child a {
+    border-bottom: 3px solid;
+    border-color: hsl( var(--clr-white));
+}
+
+.primary-navigation a:nth-child(2) {
+    border-bottom: 3px solid red;
+} */
+
+.primary-navigation a > span {
+    font-weight: 700;
+    margin-right: .5em;
+}
+
+.underline-indicators > * {
+    cursor: pointer;
+    padding: var(--underline-gap, 1rem) 0;
+    border: 0;
+    border-bottom: 3px solid hsl(var(--clr-white) / 0)
+}
+
+.underline-indicators > *:hover,
+.underline-indicators > *:focus {
+    border-color: hsl( var(--clr-white) / .5);
+}
+
+.underline-indicators > .active,
+.underline-indicators > [aria-selected="true"] {
+    border-color: hsl( var(--clr-white) / 1);
+}
+
+.tab-list {
+    --gap: 2rem;
+}
