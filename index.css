@@ -5,12 +5,13 @@
 --clr-white:0 0% 100%;
 
 /* font-sizes */
---fs-900: 9.375rem;
---fs-800: 6.25rem;
---fs-700: 3.5rem;
---fs-600: 2rem;
+/* !!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+--fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
+--fs-800: 3.5rem;
+--fs-700: 1.5rem;
+--fs-600: 1rem;
 --fs-500: 1.75rem;
---fs-400: 1.125rem;
+--fs-400: 0.9375rem;
 --fs-300: 1rem;
 --fs-200: 0.875rem;
 
@@ -18,6 +19,29 @@
 --ff-serif: "Bellefair", serif;
 --ff-sans-cond: "Barlow Condensed", sans-serif;
 --ff-sans-normal: "Barlow", sans-serif;
+}
+
+/* why em for media-query? Safari treats media-query differently */
+/* tablet(560px) */
+@media (min-width: 35em) {
+    :root {
+        /* defines only the required */
+        --fs-800: 5rem;
+        --fs-700: 2.5rem;
+        --fs-600: 1.5rem;
+        --fs-400: 1rem;
+    }
+}
+
+/* 760px */
+@media (min-width: 45em) {
+    :root {
+        /* font-sizes */
+        --fs-800: 6.25rem;
+        --fs-700: 3.5rem;
+        --fs-600: 2rem;
+        --fs-400: 1.125rem; 
+    }
 }
 
 /*-------------------*/
@@ -34,17 +58,62 @@
     gap:var(--gap, 1rem);
 }
 
+/* move the main page's title span 'space' to the next line */
+/* defining utility class would be more flexible than giving attributes to (h1 span) */
+.d-block {
+    display: block;
+}
+
 /* applies if the child has its sibling before it */
 /* .flow > * + * { */
-   /* .flow > *:where(:not(:first-child)) {
+   .flow > *:where(:not(:first-child)) {
     margin-top: var(--flow-space, 1rem);
-    outline: 1px solid red;
-} */
+    /* outline: 1px solid red; */
+}
 
 .container {
     padding-inline: 2em;
     margin-inline: auto;
-    max-width: 60rem;
+    max-width: 80rem;
+}
+
+.grid-container {
+    display: grid;
+    text-align: center; /* why not on body? not to give influenece on header */ 
+    /* border: 2px solid limegreen; */
+    /* place-content: center;
+    row-gap: 10%; */
+    place-items: center;
+    padding-inline: 1rem;
+}
+
+.grid-container * {
+    max-width: 50ch;
+}
+
+@media (min-width: 45em) {
+    .grid-container {
+        text-align: left;
+        column-gap: var(--container-gap, 2rem);
+        grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
+    }
+
+    .grid-container> *:first-child {
+        grid-column: 2 / span 1; /*--start--*/
+        /* outline: 1px solid red; */
+    }
+
+    .grid-container> *:last-child {
+        grid-column: 3;
+        /* outline: 1px solid yellow; */
+    }
+    
+    .grid-container--home {
+        /* prevents sticking to the bottom on large screen */
+        padding-bottom: max(6rem, 20vh);
+        align-items: end;
+    }
+  
 }
 
 .sr-only {
@@ -136,7 +205,8 @@
 /*-------------------*/
 
 .large-button {
-    display: grid;
+    font-size: 2rem; /*better not to use even var (possibility of change) */
+    display: inline-grid;
     place-items: center;
     aspect-ratio: 1;
     padding: 0 2em;
@@ -214,4 +284,73 @@
 
 .tab-list {
     --gap: 2rem;
+}
+
+.dot-indicators > * {
+    cursor: pointer;
+    border:0;
+    aspect-ratio: 1;
+    /* width: 1rem;
+    height: 1rem; */
+    padding: .5em;
+    border-radius: 50%;
+    background-color: hsl(var(--clr-white) / .25)
+}
+
+.dot-indicators > *:hover,
+.dot-indicators > *:focus {
+    background-color: hsl(var(--clr-white) / .5)
+}
+
+.dot-indicators > [aria-selected="true"] {
+    background-color: hsl(var(--clr-white) / 1)
+}
+
+.number-indicators > * {
+    list-style: none;
+    color: hsl( var(--clr-white ));
+    border: 1px solid hsl( var(--clr-white ) / .5);
+    border-radius: 50%;
+    aspect-ratio: 1;
+    display: grid;
+    place-items: center;
+    padding: 1rem;
+    font-size: var(--fs-600);
+    cursor: pointer;
+}
+
+.number-indicators > *:hover {
+    border-color: hsl( var(--clr-white ) / 1);
+}
+
+.number-indicators .active {
+    background-color: hsl( var(--clr-white ));
+    color: hsl( var(--clr-dark ));
+}
+
+
+/* -------------------------------- */
+/* Page specific background         */
+/* -------------------------------- */
+
+body {
+    background-size: cover;
+    background-position: bottom center;
+}
+
+.home {
+    background-image: url('./assets/home/background-home-mobile.jpg') ;
+}
+
+@media (min-width: 35rem) {
+    .home{
+        background-position: center center; /*for readability*/
+        background-image: url('./assets/home/background-home-tablet.jpg') ;
+    }
+}
+
+@media (min-width: 45rem) {
+    .home {
+        background-image: url('./assets/home/background-home-desktop.jpg') ;
+    }
 }
