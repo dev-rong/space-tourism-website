@@ -6,6 +6,8 @@
 
 /* font-sizes */
 /* !!!!!!!!!!!!!!!!!!!!!!!!!!!!! */
+/* (min, preferred, max) */
+/* 8vw+1rem을 유지하되 5rem보다 작지 않고 9.375rem보다 크지 않게  */
 --fs-900: clamp(5rem, 8vw + 1rem, 9.375rem);
 --fs-800: 3.5rem;
 --fs-700: 1.5rem;
@@ -22,7 +24,7 @@
 }
 
 /* why em for media-query? Safari treats media-query differently */
-/* tablet(560px) */
+/* tablet(560px~) */
 @media (min-width: 35em) {
     :root {
         /* defines only the required */
@@ -33,7 +35,7 @@
     }
 }
 
-/* 760px */
+/* desktop(760px~) */
 @media (min-width: 45em) {
     :root {
         /* font-sizes */
@@ -59,7 +61,7 @@
 }
 
 /* move the main page's title span 'space' to the next line */
-/* defining utility class would be more flexible than giving attributes to (h1 span) */
+/* defining utility class would be more flexible than giving styles to (h1 span) */
 .d-block {
     display: block;
 }
@@ -79,11 +81,11 @@
 
 .grid-container {
     display: grid;
-    text-align: center; /* why not on body? not to give influenece on header */ 
+    text-align: center; /* why not on body? not to give side-effect on header */ 
     /* border: 2px solid limegreen; */
-    /* place-content: center;
+    place-items: center; /*justify-items:center; align-items:center;*/
+    /* = place-content: center;
     row-gap: 10%; */
-    place-items: center;
     padding-inline: 1rem;
 }
 
@@ -91,27 +93,29 @@
     max-width: 50ch;
 }
 
+/* desktop */
 @media (min-width: 45em) {
     .grid-container {
         text-align: left;
         column-gap: var(--container-gap, 2rem);
         grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
+        border: 3px solid red;
     }
 
     .grid-container> *:first-child {
         grid-column: 2 / span 1; /*--start--*/
-        /* outline: 1px solid red; */
+        outline: 1px solid red;
     }
 
     .grid-container> *:last-child {
         grid-column: 3;
-        /* outline: 1px solid yellow; */
+        outline: 1px solid yellow;
     }
     
     .grid-container--home {
         /* prevents sticking to the bottom on large screen */
         padding-bottom: max(6rem, 20vh);
-        align-items: end;
+        align-items: end; /* position items closer to bottom */
     }
   
 }
@@ -131,7 +135,6 @@
 .box {
     background:skyblue;
     padding:3rem;
-    
 }
 
 .call-to-action{
@@ -152,10 +155,12 @@
 .text-white { color: hsl( var(--clr-white) );}
 
 
+
 .example-component {
     background-color: hsl( var(--clr-dark) / .5 );
-    /* background-color: hsl(150 77% 90% / .5); */
+    /* background-color: hsl(150 77% 90% / .5);  */
 }
+
 
 /* typography */
 
@@ -189,7 +194,7 @@
     font-family: var(--ff-sans-cond);
     font-size: var(--fs-500);
     text-transform: uppercase;
-    /* for small, specific things, you can mix */
+    /* for small, specific things like letter-spacing, border-radius, etc you can mix (r)em/px unit */
     letter-spacing: 4.72px;
 }
 
@@ -240,6 +245,18 @@
     padding: 0;
     margin: 0;
     --underline-gap: 2rem;
+}
+
+/* setting max-width is rare, but in this case, prevents over-writing and complexity */
+@media (max-width: 35rem) {
+    .primary-navigation {
+        flex-direction: column; /* stretches button but fix with position:fixed */
+        position: fixed; 
+        background: hsl( var(--clr-dark ));
+        padding: min(20rem, 15vh) 2rem;
+        inset: 0 0 0 20%;
+        z-index: 1000;
+    }
 }
 
 .primary-navigation a {
