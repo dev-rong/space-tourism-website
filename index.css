@@ -1,3 +1,20 @@
+/* html {
+  --bg-color: #ffffff;
+  --color: #000000;
+}
+
+html[dark] {
+  color: #ffffff;
+  --bg-color: #000000;
+}
+
+@media (prefers-color-scheme : dark) {
+  body {
+    background: #000;
+    color: #fff
+  }
+} */
+
 :root {
 /* colors */
 --clr-dark: 230 35% 7%;
@@ -211,8 +228,8 @@
 
 .large-button {
     font-size: 2rem; /*better not to use even var (possibility of change) */
-    display: inline-grid;
-    place-items: center;
+    display: inline-grid; /* avoid grid being block */
+    place-items: center; /* justify-content:center; + align-content: center; */
     aspect-ratio: 1;
     padding: 0 2em;
     border-radius: 50%;
@@ -245,18 +262,26 @@
     padding: 0;
     margin: 0;
     --underline-gap: 2rem;
+    background: hsl( var(--clr-white) / .1); /* glass-morphism */
 }
 
 /* setting max-width is rare, but in this case, prevents over-writing and complexity */
 @media (max-width: 35rem) {
     .primary-navigation {
+        --underline-gap: .5rem;
         flex-direction: column; /* stretches button but fix with position:fixed */
         position: fixed; 
-        background: hsl( var(--clr-dark ));
         padding: min(20rem, 15vh) 2rem;
-        inset: 0 0 0 20%;
+        inset: 0 0 0 20%; /* to the right */
         z-index: 1000;
     }
+
+    /* specifies the exact ul class not including its descendents */
+    /* in case of screen version, set .active rather than * */
+    .primary-navigation.underline-indicators > .active {
+        border: 0;
+    }
+
 }
 
 .primary-navigation a {
