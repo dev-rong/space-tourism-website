@@ -263,6 +263,7 @@ html[dark] {
     margin: 0;
     --underline-gap: 2rem;
     background: hsl( var(--clr-white) / .1); /* glass-morphism */
+    backdrop-filter: blur(1rem);
 }
 
 /* setting max-width is rare, but in this case, prevents over-writing and complexity */
