@@ -9,8 +9,8 @@ const navToggle = one('.mobile-nav-toggle')
 navToggle.addEventListener("click", () => {
     const visibility = nav.getAttribute("data-visible")
     visibility === "false"? 
-    nav.setAttribute("data-visible", "true") && navToggle.setAttribute("aria-expanded", "true") : 
-    nav.setAttribute("data-visible", "false") && navToggle.setAttribute("aria-expanded", "false")
+    (nav.setAttribute("data-visible", "true"), navToggle.setAttribute("aria-expanded", "true")) : 
+    (nav.setAttribute("data-visible", "false"), navToggle.setAttribute("aria-expanded", "false"))
 })
 
 // 인터넷 익스플로러11+ 은 표준을 지원하지만, 이전 버전들은 dataset을 지원하지 않습니다. 
