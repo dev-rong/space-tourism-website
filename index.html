@@ -12,26 +12,33 @@
   <!-- Custom CSS -->
   <link rel="stylesheet" href="./reset.css">
   <link rel="stylesheet" href="./index.css">
+  <script src="index.js" defer></script>
   <title>Frontend Mentor | Space tourism website</title>
 </head>
 <body class="home">
-
-  <header class="primary-header flex" style="justify-content:space-between;">
-    <div>
-      <img src="./assets/shared/logo.svg" alt="space-tourism logo">
-    </div>
-    <button class="mobile-nav-toggle" aria-controls="primary-navigation" aria-expanded="false"><span class="sr-only">Menu</span></button>
+  <!-- for accessibility -->
+  <a class="skip-to-content" href="#main">Skip to content</a>
+  <header class="primary-header flex">
+    <!-- my ::before is here -->
+    <!-- flex-child 1 -->
+    <a href="#">
+      <img src="./assets/shared/logo.svg" alt="space-tourism logo" class="logo">
+    </a>
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation"><span class="sr-only" aria-expanded="false">Menu</span></button>
+    <!-- flex-child 2 -->
     <nav>
-      <ul id="primary-navigation" class="primary-navigation underline-indicators flex">
-        <li class="active"><a href="" class="uppercase text-white letter-spacing-2"><span>00</span>Home</a></li>
-        <li><a href="" class="uppercase text-white letter-spacing-2"><span>01</span>Destination</a></li>
-        <li><a href="" class="uppercase text-white letter-spacing-2"><span>02</span>Crew</a></li>
-        <li><a href="" class="uppercase text-white letter-spacing-2"><span>03</span>Technology</a></li>
+      <ul id="primary-navigation" data-visible="false" class="primary-navigation underline-indicators flex">
+        <li class="active"><a href="#" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">00</span>Home</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">01</span>Destination</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">02</span>Crew</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">03</span>Technology</a></li>
+      <!-- sr-only:hide visually <-> aria-hidden="true":hide from sr(omit numbers) -->
       </ul>
     </nav>
+    <!-- my ::after is here -->
   </header>
 
-  <div class="grid-container grid-container--home">
+  <main id="main" class="grid-container grid-container--home">
     <!-- grid column 1 -->
     <div>
       <h1 class="uppercase ff-sans-cond fs-500 text-accent letter-spacing-1">So, you want to travel to
@@ -47,30 +54,6 @@
     <div>
       <a href="#" class="large-button uppercase ff-serif text-dark bg-white">Explore</a>
     </div>
-    
-  </div>
-  
-  <!-- <div class="flex">
-    <main>
-      <h2>
-      So, you want to travel to
-      <span>Space</span>
-    </h2>
-      <section>
-        Let’s face it; if you want to go to space, you might as well genuinely go to 
-      outer space and not hover kind of on the edge of it. Well sit back, and relax 
-      because we’ll give you a truly out of this world experience!
-      </section>
-    </main>
-    <aside class="flex" style="margin-top: 5rem;">
-        <div style="flex-basis: 100%;">
-            <a href="#" class="large-button uppercase ff-serif fs-600 text-dark bg-white">Explore</a>
-        </div>
-    </aside>
-  </div> -->
-  <!-- <script>if(window.matchMedia('(prefers-color-scheme:dark)').matches){
-    document.documentElement.setAttribute("dark", true) 
-  }
-  </script> -->
+  </main>
 </body>
 </html>
