@@ -3,35 +3,80 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
   <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
-  
+   <!-- Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+   rel="stylesheet">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="./reset.css">
+   <link rel="stylesheet" href="./index.css">
+   <script src="index.js" defer></script>
   <title>Frontend Mentor | Space tourism website</title>
 </head>
-<body>
+<body class="destination">
+  <!-- for accessibility -->
+  <a class="skip-to-content" href="#main">Skip to content</a>
+  <header class="primary-header flex">
+    <!-- my ::before is here -->
+    <!-- flex-child 1 -->
+    <a href="#">
+      <img src="./assets/shared/logo.svg" alt="space-tourism logo" class="logo">
+    </a>
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation"><span class="sr-only" aria-expanded="false">Menu</span></button>
+    <!-- flex-child 2 -->
+    <nav>
+      <ul id="primary-navigation" data-visible="false" class="primary-navigation underline-indicators flex">
+        <li class="active"><a href="#" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">00</span>Home</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">01</span>Destination</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">02</span>Crew</a></li>
+        <li><a href="" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">03</span>Technology</a></li>
+      <!-- sr-only:hide visually <-> aria-hidden="true":hide from sr(omit numbers) -->
+      </ul>
+    </nav>
+    <!-- my ::after is here -->
+  </header>
 
-  00 Home
-  01 Destination
-  02 Crew
-  03 Technology
+  <main id="main" class="grid-container grid-container--home">
+    <!-- grid column 1 -->
+    <div>
+      <p class="uppercase text-white letter-spacing-2"><span aria-hidden="true">01</span>Pick your Destination</p>
+      <img src="./assets/destination/image-moon.png" alt="moon">
+    </div>
+      <!-- grid column 2 -->
+    <!--change grid to inline-grid so that it doesn't take space like 'block' does-->
+    <div>
+      <nav>
+        <ul id="primary-navigation" data-visible="false" class="primary-navigation underline-indicators flex">
+          <li class="active"><a href="#" class="uppercase text-white letter-spacing-2">Moon</a></li>
+          <li><a href="" class="uppercase text-white letter-spacing-2">Mars</a></li>
+          <li><a href="" class="uppercase text-white letter-spacing-2">Europa</a></li>
+          <li><a href="" class="uppercase text-white letter-spacing-2">Titan</a></li>
+        </ul>
+      </nav>
+    
+      <div>
+        <h1 class="uppercase ff-sans-cond fs-500 text-accent letter-spacing-1">
+          <span class="d-block uppercase ff-serif fs-900 text-white">Moon</span>
+        </h1>
+        <p class="text-accent">See our planet as you’ve never seen it before. A perfect relaxing trip away to help
+          regain perspective and come back refreshed. While you’re there, take in some history
+          by visiting the Luna 2 and Apollo 11 landing sites.
+        </p>
+      </div>
 
-  01 Pick your destination
-
-  Moon
-  Mars
-  Europa
-  Titan
-
-  Moon
-
-  See our planet as you’ve never seen it before. A perfect relaxing trip away to help 
-  regain perspective and come back refreshed. While you’re there, take in some history 
-  by visiting the Luna 2 and Apollo 11 landing sites.
-
-  Avg. distance
-  384,400 km
-
-  Est. travel time
-  3 days
+      <div>
+        <div>
+          <p aria-hidden="true">Avg. distance</p>
+          <p>384,400 km</p>
+        </div>
+        <div>
+          <p aria-hidden="true">Est. travel time</p>
+          <p>3 days</p>
+        </div>
+      </div>
+    </div>
+  </main>
 </body>
 </html>
