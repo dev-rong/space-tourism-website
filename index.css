@@ -12,7 +12,7 @@
 --fs-800: 3.5rem;
 --fs-700: 1.5rem;
 --fs-600: 1rem;
---fs-500: 1.75rem;
+--fs-500: 1rem;
 --fs-400: 0.9375rem;
 --fs-300: 1rem;
 --fs-200: 0.875rem;
@@ -31,6 +31,7 @@
         --fs-800: 5rem;
         --fs-700: 2.5rem;
         --fs-600: 1.5rem;
+        --fs-500: 1.25rem;
         --fs-400: 1rem;
     }
 }
@@ -42,6 +43,7 @@
         --fs-800: 6.25rem;
         --fs-700: 3.5rem;
         --fs-600: 2rem;
+        --fs-500: 1.5rem;
         --fs-400: 1.125rem; 
     }
 }
@@ -77,47 +79,6 @@
     padding-inline: 2em;
     margin-inline: auto;
     max-width: 80rem;
-}
-
-.grid-container {
-    display: grid;
-    text-align: center; /* why not on body? not to give side-effect on header */ 
-    /* border: 2px solid limegreen; */
-    place-items: center; /*justify-items:center; align-items:center;*/
-    /* = place-content: center;
-    row-gap: 10%; */
-    padding-inline: 1rem;
-}
-
-.grid-container * {
-    max-width: 50ch;
-}
-
-/* desktop */
-@media (min-width: 45rem) {
-    .grid-container {
-        text-align: left;
-        column-gap: var(--container-gap, 2rem);
-        grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
-        /* border: 3px solid blue; */
-    }
-
-    .grid-container> *:first-child {
-        grid-column: 2 / span 1; /*--start--*/
-        /* outline: 1px solid red; */
-    }
-
-    .grid-container> *:last-child {
-        grid-column: 3 ;
-        /* outline: 1px solid yellow; */
-    }
-    
-    .grid-container--home {
-        /* prevents sticking to the bottom on large screen */
-        padding-bottom: max(6rem, 20vh);
-        align-items: end; /* (stretch, center, start, end) position items closer to bottom */
-    }
-  
 }
 
 /* for accessibility */
@@ -212,7 +173,7 @@
     letter-spacing: 4.72px;
 }
 /* for design-system */
-.numbered-title span{
+.numbered-title span {
     /* relative to the font-size of .numbered-title */
     margin-right: .5em; 
     font-weight: 700;
@@ -478,11 +439,6 @@ nav {
     color: hsl( var(--clr-dark ));
 }
 
-
-/* -------------------------------- */
-/* Page specific background         */
-/* -------------------------------- */
-
 body {
     background-size: cover;
     background-position: bottom center;
@@ -503,4 +459,86 @@ body {
     .home {
         background-image: url('./assets/home/background-home-desktop.jpg') ;
     }
+}
+
+/* -------------------------------- */
+/* Layout                           */
+/* -------------------------------- */
+
+
+.grid-container {
+    display: grid;
+    text-align: center; /* why not on body? not to give side-effect on header */ 
+    /* border: 2px solid limegreen; */
+    place-items: center; /*justify-items:center; align-items:center;*/
+    /* = place-content: center;
+    row-gap: 10%; */
+    padding-inline: 1rem;
+    padding-bottom: 4rem;
+}
+
+.grid-container * {
+    max-width: 50ch;
+}
+
+.numbered-title {
+    grid-area: title;
+}
+
+/* desination layout */
+.grid-container--destination {
+    --flow-space: 2rem;
+    grid-template-areas: 
+    'title'
+    'image'
+    'tabs'
+    'content';
+}
+
+/* higher specificity prevents overriding */
+.grid-container--destination > img {
+    grid-area: image;
+    max-width: 60%;
+}
+
+.grid-container--destination > .tab-list {
+    grid-area: tabs;
+}
+
+.grid-container--destination > .destination-info {
+    grid-area: content;
+}   
+
+.destination-meta {
+    flex-direction: column;
+    border-top: 1px solid hsl( var(--clr-white ) / .1);
+    padding-top: 2.5rem;
+    margin-top: 2.5rem;
+}
+
+/* desktop */
+@media (min-width: 45rem) {
+    .grid-container {
+        text-align: left;
+        column-gap: var(--container-gap, 2rem);
+        grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
+        /* border: 3px solid blue; */
+    }
+
+    .grid-container> *:first-child {
+        grid-column: 2 / span 1; /*--start--*/
+        /* outline: 1px solid red; */
+    }
+
+    .grid-container> *:last-child {
+        grid-column: 3 ;
+        /* outline: 1px solid yellow; */
+    }
+    
+    .grid-container--home {
+        /* prevents sticking to the bottom on large screen */
+        padding-bottom: max(6rem, 20vh);
+        align-items: end; /* (stretch, center, start, end) position items closer to bottom */
+    }
+  
 }
