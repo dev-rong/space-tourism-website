@@ -72,7 +72,7 @@
 /* .flow > * + * { */
    .flow > *:where(:not(:first-child)) {
     margin-top: var(--flow-space, 1rem);
-    outline: 5px solid blue;
+    /* outline: 5px solid blue; */
 }
 
 .container {
@@ -137,7 +137,6 @@
 
 
 /* typography */
-
 .ff-serif { font-family: var(--ff-serif); } 
 .ff-sans-cond { font-family: var(--ff-sans-cond); } 
 .ff-sans-normal { font-family: var(--ff-sans-normal); } 
@@ -240,6 +239,7 @@
     align-items: center;
 }
 
+/* logo tail:  default position right end > setting order */
 .primary-header::after {
     content: '';
     display: block;
@@ -258,7 +258,6 @@ nav {
 .primary-navigation {
     --gap: clamp(1.5rem, 5vw, 3.5rem); /* prevent bumping with logo */
     list-style: none;
-    /* justify-content: space-around; */
     padding: 0;
     margin: 0;
     --underline-gap: 2rem;
@@ -416,7 +415,7 @@ nav {
 .dot-indicators > [aria-selected="true"] {
     background-color: hsl(var(--clr-white) / 1)
 }
-
+                                  
 .number-indicators > * {
     list-style: none;
     color: hsl( var(--clr-white ));
@@ -430,12 +429,19 @@ nav {
     cursor: pointer;
 }
 
-.number-indicators > *:hover {
-    border-color: hsl( var(--clr-white ) / 1);
+.number-indicators > *:hover,
+.number-indicators > *:focus {
+    background: hsl( var(--clr-white ) / .5);
+}
+
+.number-indicators > *:active,
+.number-indicators > *[aria-selected="true"]  {
+    background: hsl( var(--clr-white ) / 1);
+    color: hsl( var(--clr-dark ));
 }
 
 .number-indicators .active {
-    background-color: hsl( var(--clr-white ));
+    background-color: hsl( var(--clr-white ) / 1);
     color: hsl( var(--clr-dark ));
 }
 
@@ -465,7 +471,6 @@ body {
 /* Layout                           */
 /* -------------------------------- */
 
-
 .grid-container {
     display: grid;
     text-align: center; /* why not on body? not to give side-effect on header */ 
@@ -477,8 +482,10 @@ body {
     padding-bottom: 4rem;
 }
 
+/* info text */
 .grid-container p:not([class]) {
     max-width: 50ch;
+    color: hsl(var(--clr-light));
 }
 
 .numbered-title {
@@ -488,7 +495,7 @@ body {
 /* desination layout */
 .grid-container--destination {
     --flow-space: 2rem;
-    grid-template-areas: 
+    grid-template-areas: /* shortcut: gta */
     'title'
     'image'
     'tabs'
@@ -520,6 +527,49 @@ body {
     font-size: 1.75rem;
 }
 
+/* crew layout */
+.crew {
+    position: relative;
+}
+
+.crew::after {
+    content: "";
+    background-color: hsl( var(--clr-dark));
+    background-image: url(./assets/crew/background-crew-mobile.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    opacity: 0.4;
+    position: absolute;
+    z-index: -1;
+    top: 0px;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+}
+
+.grid-container--crew {
+    grid-template-areas: 
+        'title'
+        'image'
+        'tabs'
+        'content';
+}
+
+.grid-container--crew > img {
+    grid-area: image;
+    max-width: 60%;
+    border-bottom: 1px solid hsl( var(--clr-white) / .1);
+}
+
+.grid-container--crew > .dot-indicators{
+    grid-area: tabs;
+}
+
+.grid-container--crew > .crew-details {
+    grid-area: content;
+}
+
+
 /* tablet */
 @media (min-width: 35rem) {
     .numbered-title {
@@ -530,6 +580,10 @@ body {
     .destination-meta {
         flex-direction: row;
         justify-content: space-evenly;
+    }
+
+    .crew::before {
+        background-image: url(./assets/crew/background-crew-tablet.jpg);
     }
 }
 
@@ -567,13 +621,27 @@ body {
             '. image content .';
     }
 
-    .grid-container--destination > img {
+    .grid-container--destination > img,
+    .grid-container--crew > img {
         max-width: 90%;
     }
     
     .destination-meta {
-        --gap: 6rem;
+        --gap: min(6vw, 6rem);
         justify-content: start;
     }
 
+    /* crew */
+    .crew::before {
+        background-image: url(./assets/crew/background-crew-desktop.jpg);
+    }
+
+    .grid-container--crew {
+        grid-template-areas: 
+            '. title title .'
+            '. content image .'
+            '. tabs image .';
+    }
+
 }
+
