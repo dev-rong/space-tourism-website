@@ -537,6 +537,7 @@ body {
 .grid-container--destination > picture {
     grid-area: image;
     max-width: 60%;
+    align-self: start; /* prevent image moving */ 
 }
 
 .grid-container--destination > .tab-list {
@@ -545,7 +546,14 @@ body {
 
 .grid-container--destination > .destination-info {
     grid-area: content;
-}   
+} 
+
+.grid-container--crew {
+    grid-template-areas: 
+        '. title title .'
+        '. content image .'
+        '. tabs image .';
+}
 
 .destination-meta {
     flex-direction: column;
@@ -606,7 +614,7 @@ body {
 }
 
 /* tablet */
-@media (min-width: 35rem) {
+@media (min-width: 35em) {
     .numbered-title {
         justify-self: start;
         margin-top: 2rem;
@@ -633,12 +641,18 @@ body {
 }
 
 /* desktop */
-@media (min-width: 45rem) {
+@media (min-width: 45em) {
     .grid-container {
         text-align: left;
         column-gap: var(--container-gap, 2rem);
         grid-template-columns: minmax(2rem, 1fr) repeat(2, minmax(0, 30rem)) minmax(2rem, 1fr);
         /* border: 3px solid blue; */
+    }
+
+    .grid-container--home {
+        /* prevents sticking to the bottom on large screen */
+        padding-bottom: max(6rem, 20vh);
+        align-items: end; /* (stretch, center, start, end) position items closer to bottom */
     }
 
     .grid-container--home> *:first-child {
@@ -649,12 +663,6 @@ body {
     .grid-container--home> *:last-child {
         grid-column: 3;
         /* outline: 1px solid yellow; */
-    }
-    
-    .grid-container--home {
-        /* prevents sticking to the bottom on large screen */
-        padding-bottom: max(6rem, 20vh);
-        align-items: end; /* (stretch, center, start, end) position items closer to bottom */
     }
  
     .grid-container--destination {
@@ -682,6 +690,8 @@ body {
     }
 
     .grid-container--crew {
+        justify-items: start;
+        grid-template-columns: minmax(1rem, 1fr) minmax(0, 37rem) minmax(0, 23rem) minmax(1rem, 1fr);
         grid-template-areas: 
             '. title title .'
             '. content image .'
@@ -693,7 +703,9 @@ body {
     }
 
     .grid-container--crew > picture {
+        grid-column: span 2;
         align-self: end;
+        max-width: 80%;
     }
 
 }
