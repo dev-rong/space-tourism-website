@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/favicon-32x32.png">
+   <!-- Google Fonts -->
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;700&family=Bellefair&family=Barlow:wght@400;700&display=swap"
+   rel="stylesheet">
+   <!-- Custom CSS -->
+   <link rel="stylesheet" href="./reset.css">
+   <link rel="stylesheet" href="./index.css">
+   <script src="navigation.js" defer></script>
+   <script src="tabs.js" defer></script>
+  <title>Frontend Mentor | Space tourism website</title>
+</head>
+<body class="technology">
+  <!-- for accessibility -->
+  <a class="skip-to-content" href="#main">Skip to content</a>
+  <header class="primary-header flex">
+    <!-- my ::before is here -->
+    <!-- flex-child 1 -->
+    <a href="index.html">
+      <img src="./assets/shared/logo.svg" alt="space-tourism logo" class="logo">
+    </a>
+    <button class="mobile-nav-toggle" aria-controls="primary-navigation"><span class="sr-only" aria-expanded="false">Menu</span></button>
+    <!-- flex-child 2 -->
+    <nav>
+      <ul id="primary-navigation" data-visible="false" class="primary-navigation underline-indicators flex">
+        <li><a href="index.html" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">00</span>Home</a></li>
+        <li><a href="destination.html" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">01</span>Destination</a></li>
+        <li><a href="crew.html" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">02</span>Crew</a></li>
+        <li class="active"><a href="technology.html" class="uppercase text-white letter-spacing-2"><span aria-hidden="true">03</span>Technology</a></li>
+      <!-- sr-only:hide visually <-> aria-hidden="true":hide from sr(omit unnecesary numbers for sr) -->
+      </ul>
+    </nav>
+    <!-- my ::after is here -->
+  </header>
+
+  <main id="main" class="grid-container grid-container--tech flow">
+    <!-- grid column 1 -->
+      <h1 class="numbered-title"><span aria-hidden="true">03</span>Space launch 101</h1>
+      
+      <picture id="vehicle-image">
+        <img srcset="assets/technology/image-launch-vehicle-portrait.jpg 515w, 
+        assets/technology/image-launch-vehicle-landscape.jpg 768w"
+        sizes="(min-width: 45em) 515px,
+                768px"
+        src="assets/technology/image-launch-vehicle-portrait.jpg"
+        alt="launch vehicle"/>
+      </picture>
+      <picture hidden id="port-image">
+        <img srcset="assets/technology/image-spaceport-portrait.jpg 515w,
+        assets/technology/image-spaceport-landscape.jpg 768w"
+        sizes="(min-width: 45em) 515px,
+        768px"
+        src="assets/technology/image-spaceport-portrait.jpg" alt="spaceport">
+      </picture>
+      <picture hidden id="capsule-image">
+        <img srcset="assets/technology/image-space-capsule-portrait.jpg 515w,
+        assets/technology/image-space-capsule-landscape.jpg 768w"
+        sizes="(min-width: 45em) 515px,
+        768px"
+        src="assets/technology/image-space-capsule-portrait.jpg" alt="space capsule">
+      </picture>
+      <!-- grid column 2 -->
+    <!--change grid to inline-grid so that it doesn't take space like 'block' does-->
+    
+    
+      <div role="tablist" class="number-indicators flex">
+          <button aria-selected="true" class="active" role="tab" aria-controls="vehicle-tab" data-image="vehicle-image" tabindex="0"><a><span aria-hidden="true">1</span></a></button>
+          <button aria-selected="false" role="tab" aria-controls="port-tab" data-image="port-image" tabindex="-1"><a><span aria-hidden="true">2</span></a></button>
+          <button aria-selected="false" role="tab" aria-controls="capsule-tab" data-image="capsule-image" tabindex="-1"><a><span aria-hidden="true">3</span></a></button>
+      </div>
+    
+
+      <!-- Launch vehicle -->
+      <article id="vehicle-tab" class="tech-details flow" tabindex="0"  role="tabpanel">
+        <header class="flow flow--space-small">
+          <h2 class="text-accent fs-500 ff-sans-cond uppercase letter-spacing-1">The terminology...</h2>
+          <p class="fs-700 uppercase ff-serif">Launch vehicle</p>
+        </header>
+          <p>A launch vehicle or carrier rocket is a rocket-propelled vehicle used to carry a 
+            payload from Earth's surface to space, usually to Earth orbit or beyond. Our 
+            WEB-X carrier rocket is the most powerful in operation. Standing 150 metres tall, 
+            it's quite an awe-inspiring sight on the launch pad!
+          </p>
+      </article>
+      <!-- Spaceport -->
+      <article hidden id="port-tab" class="tech-details flow" tabindex="0"  role="tabpanel">
+        <header class="flow flow--space-small">
+          <h2 class="text-accent fs-500 ff-sans-cond uppercase letter-spacing-1">The terminology...</h2>
+          <p class="fs-700 uppercase ff-serif">Spaceport</p>
+        </header>
+          <p>A spaceport or cosmodrome is a site for launching (or receiving) spacecraft, 
+            by analogy to the seaport for ships or airport for aircraft. Based in the 
+            famous Cape Canaveral, our spaceport is ideally situated to take advantage 
+            of the Earth’s rotation for launch.
+          </p>
+      </article>
+      <!-- Space capsule -->
+      <article hidden id="capsule-tab" class="tech-details flow" tabindex="0"  role="tabpanel">
+        <header class="flow flow--space-small">
+          <h2 class="text-accent fs-500 ff-sans-cond uppercase letter-spacing-1">The terminology...</h2>
+          <p class="fs-700 uppercase ff-serif">Space capsule</p>
+        </header>
+          <p>A space capsule is an often-crewed spacecraft that uses a blunt-body reentry 
+            capsule to reenter the Earth's atmosphere without wings. Our capsule is where 
+            you'll spend your time during the flight. It includes a space gym, cinema, 
+            and plenty of other activities to keep you entertained.
+          </p>
+      </article>
+      </article>
+    </main>
+</body>
+</html>
+<body>
+
+ 
+
+  
+
+ 
+
+  
+
+
+
